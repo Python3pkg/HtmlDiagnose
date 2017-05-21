@@ -5,8 +5,8 @@
 # @Link	: https://github.com/sintrb/HtmlDiagnose
 # @Version : 1.0
 
-from HTMLParser import HTMLParser
-from urlparse import urljoin
+from html.parser import HTMLParser
+from urllib.parse import urljoin
 import sys
 import re
 
@@ -150,7 +150,7 @@ def main():
 			urls.append(arg)
 
 	if not urls:
-		print parser.format_help()
+		print(parser.format_help())
 		exit()
 	
 	url = urls[0]
@@ -160,11 +160,11 @@ def main():
 	
 	def printerr(e, url, preurl):
 		if not preurl:
-			sys.stderr.write(u' %s in %s\n' % (e, url))
+			sys.stderr.write(' %s in %s\n' % (e, url))
 		else:
-			sys.stderr.write(u' %s in %s (from %s)\n' % (e, url, preurl))
+			sys.stderr.write(' %s in %s (from %s)\n' % (e, url, preurl))
 		if not goon:
-			raise Exception(u'Exit with exception')
+			raise Exception('Exit with exception')
 	
 	reqkwargs = {
 			'headers':[]
@@ -184,12 +184,12 @@ def main():
 			if type(url) == tuple:
 				url, preurl = url
 			if url and url not in doneurls and url.startswith('http'):
-				print('%s' % url)
+				print(('%s' % url))
 				html = None
 # 				html = getHtmlOfUrl(url, **reqkwargs)
 				try:
 					html = getHtmlOfUrl(url, **reqkwargs)
-				except Exception, e:
+				except Exception as e:
 					printerr(e, url, preurl)
 				if not html:
 					continue
@@ -204,9 +204,9 @@ def main():
 				if err:
 					printerr(err, url, preurl)
 		print('finish!')
-	except Exception, e:
+	except Exception as e:
 		print(e)
-	except KeyboardInterrupt, e:
+	except KeyboardInterrupt as e:
 		print('user exit!')
 		pass
 

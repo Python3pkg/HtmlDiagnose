@@ -1,3 +1,3 @@
-import HtmlDiagnose
+from . import HtmlDiagnose
 
 __alll__ = ['HtmlDiagnose']
